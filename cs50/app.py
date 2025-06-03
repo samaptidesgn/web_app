@@ -1,7 +1,6 @@
 from flask import Flask, render_template, redirect, request, session, flash
 from flask_session import Session
 import sqlite3
-import datetime
 from math import cos, sin
 
 app = Flask(__name__)
@@ -73,7 +72,7 @@ def login():
 
         # checking the user inputs
         if not name or not passw:
-            return render_template("apology.html")
+            return render_template("login.html", error="Please fill all the fields")
         
         # connecting database and checking if it is a valid user
         db = db_conn()
@@ -84,7 +83,7 @@ def login():
             row = rows["id"]
             session["id"] = row
         else:
-            return render_template("apology.html")
+            return render_template("register.html", error="Invalid username or password")
         
         # redirecting to the progress page
         return redirect("/progress")
@@ -103,9 +102,9 @@ def register():
 
         # checking if the name, password and confirmed password has not been entered
         if not name or not passw or not hash:
-            return render_template("apology.html")
+            return render_template("register.html", error="Please fill all the fields")
         if passw != hash:
-            return render_template("apology.html")
+            return render_template("register.html", error="Passwords do not match")
         
         # hashing the password
         hash = "#"+ hash
@@ -114,7 +113,7 @@ def register():
         db = db_conn()
         rows = db.execute('SELECT * FROM user WHERE name = ?', (name,)).fetchall()
         if len(rows) != 0:
-            return render_template("apology.html")
+            return render_template("register.html", error="Username already taken")
 
         db.execute('INSERT INTO user (name, password, hash) VALUES (?, ?, ?)', (name, passw, hash))
     
