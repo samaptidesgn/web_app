@@ -6,14 +6,19 @@
 
 {% block body %}
 
-    <h1 id="cntr">Euphoria</h1>
-    <div class="container">
-        <div class="button-row">
-            <button class="round" onclick="window.location.href='/login'">Log In</button>
-        </div>
-        <div class="button-row">
-            <button class="round" onclick="window.location.href='/register'">Register</button>
-        </div>
+    <div id="container">
+        
+        <h1 id="cntr">Euphoria</h1>
+
+        <button class="round" onclick="window.location.href='/login'">Log In</button>
+            
+        <button class="round" onclick="window.location.href='/register'">Register</button><br>
+
+        <h3 id="foot">Follow us on -
+            <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>&nbsp;&nbsp;
+            <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a>&nbsp;&nbsp;
+            <a href="https://www.snapchat.com/"><i class="fab fa-snapchat"></i></a>&nbsp;&nbsp;
+        </h3>
     </div>
 
 {% endblock%}
